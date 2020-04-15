@@ -148,3 +148,48 @@ links
 * https://www.youtube.com/watch?v=Ji6NHEnNHcA&t=26m9s
 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions
+
+*******
+<div id="fechamantos">
+
+# Fechamentos
+
+## Funções mantêm seu escopo 
+
+Processo de uma funcao reter acesso ao escopo é chamando de fechamento ou closure. 
+
+****
+A combinação entre função e o ambiente léxico em que essa função foi declarada. 
+****
+
+Ou seja, faz referencia como o codigo foi escrito no arquivo JS. 
+A propria função o codigo( mas, mais importante, a cadeia de escopos de) em que a função foi declarara.
+
+## Criando um fechamento
+
+Sempre que uma função é definida, é criado um fechamento para ela. Ou seja, todas as funções têm fechamento!! 
+Isso acontece pq as funções focam em pelo menos um outro contexto na cadeia de escopos: o escopo global. Este recurso dos fechamanetoss fazem a diferença quando trabalhamos com uma função aninhada -uma função definida dentro de outra função!
+
+Mas função aninhada tem aceso a variaveis externas a ela. Na cadeia de escopos, isso encolve as variaveis da própria função de fechamanto externo!
+Estas funçoes aninhadas capturam variaveis que não foram passadas como argumentos nem definidas localmente, também conhecidas como variaveis livres. 
+
+Notamos que as função matêmn uma refência ao escopo da sua função mãe. Enquanto a referencia á função pode ser acessada, o escopo persiste!
+
+## Coleta de lixo
+
+No JS gerecia a memória como a coleta de lixo automática. Assim quando os dados não são mais referenciaveis - eles sao coletados como lixo e serão destruidos em algum momento. Assim os recursos que os dados consumiam são liberados -  mémoria do PC
+
+Podemos analisar a coleta de lixo no contexto dos fechamentos. Sabemos que uma função interna aninhada pode acessar as variaveis de função-mae. Se a função aninhada captura e usa variaveis da sua função mãe -  ou variaveis da cadeia de escopos, como as da superior a função mae. Ficaram na memória pelo tempo que as função que as ultilizam continuarem sendo referenciadas.
+
+Logo no JS, variaveis referenciadas não passam pela colera de lixo.
+
+## Resumo
+Um fechamento é a combinação entre função e o ambiente léxico em que essa função foi declarada. Sempre que uma função é definida, é criado um fechamento para ela. Isso é especialmente eficaz em situações em que uma função é definida dentro de outra função, permitindo que a função aninhada acesse variáveis fora dela. As funções também mantêm um vínculo com o escopo da função-mãe, mesmo que a mãe tenha retornado. Isso impede que os dados nas funções-mãe passem pela coleta de lixo.
+
+links 
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+* http://es5.github.io/#x10.2
+
