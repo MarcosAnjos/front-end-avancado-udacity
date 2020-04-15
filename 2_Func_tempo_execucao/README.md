@@ -9,7 +9,7 @@ Aula 02
 
 <div id="intro">
 
-As funçãoe são uma das estruturas de dados mais importantes...
+As funções são uma das estruturas de dados mais importantes...
 
 *****
 <div id="func_chamada">
