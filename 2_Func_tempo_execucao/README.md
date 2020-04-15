@@ -1,11 +1,11 @@
 Aula 02
 
-[Introducao](#intro)
-[Funcão de chamada](#func_chamada)
-[Retornos de chamada](#retorno_chamada)
-[Escopo](#escopo)
-[Fechamentos](#fechamantos)
-[Expressão de função invocação](#expressao_func)
+* [Introducao](#intro)
+* [Funcão de chamada](#func_chamada)
+* [Retornos de chamada](#retorno_chamada)
+* [Escopo](#escopo)
+* [Fechamentos](#fechamantos)
+* [Expressão de função invocação](#expressao_func)
 
 <div id="intro">
 
@@ -192,4 +192,133 @@ links
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 * http://es5.github.io/#x10.2
+
+***
+<div id="expressao_func">
+
+# Declaração de fundos X expressões de função
+
+Deixa-me explicar antes sobre expressões de função invocada imediatamente (IIFE), com relação as diferenças entre declaraçãoe expressoes de função.
+
+Uma declaração de função define uma função e não exige que uma variavel seja atribuida a ela. Ou seja uma função e não retorna um valor. 
+
+function returnOi (){
+    return 'Oi'
+}
+
+Assim uma expressão de funlção retorna um valor. Expressões de função podem ser anônimas ou não e fazer parte da sintaxe de outra expressão. São claramente atribuidas a variaveis tbm. 
+
+## Expressão de função invocada imediatamente - Estrutura e sintaxe
+
+Para invocar uma funçaõ imediatamente - IIFE
+
+(function sayHi(){
+    alert('Oi')
+})()
+
+// Oi
+
+Passando argumentos para IIFE
+
+(function (name){
+    alert('Oi' + name)
+})()
+
+
+## IIFE e escopo privado
+
+Um dos principais usos das IIFE é  criar escopo privado. Ou seja no JS as variaveis tradicionalmente tem escopo em função. Agora podemos aproveitar deste recurso!
+
+const myFunc = (
+    function() {
+        const hi = 'oi'
+        return function() {
+            console.log(hi)
+        }
+    }
+)
+
+`myFunc referencia uma IIFE com uma variavel definida localmente, hi = func. retorna que foca em hi e exibe valor no console`
+
+Outro ponto que a função que esta sendo retornada foca na variavel hi. Com isso myFunc consegue manter um estado mutavel privado que não pode ser acessado por fora da função! E tem mais: como a função expressa é chamada imediatamente, a IIFE organiza o cód. para não poluimos o escopo global. 
+
+link
+* https://www.youtube.com/watch?feature=player_detailpage&v=taaEzHI9xyY#t=2020s
+
+## IIFE - escopo privado e manipulação de eventos
+
+Digamos que queira criar um botão em uma página que alerte o usuário a cada dois cliks. Uma forma de começar isso seria monitorar o numero de vezes em que o botão foi clicado. 
+
+Para manter esses dados :
+
+Podemos controlar a contagem com uma variavel que declaramos no escopo global - isso faz sentido se outras partes do app vamos precisar acesso aos dados da contagem.
+
+Uma abordagem ainda melhor seria envolver esses dados no próprio manipulador de eventos! 
+1 - porque ele evita que a gente polua o global com mais variaveis - colisão de nome.
+2 - Se usar uma IIFE, podemos aprkoveitar um fechamento para impedir a variavel count, seja acessada externamente.
+
+EX:
+<!-- button.html -->
+
+<html>
+
+  <body>
+
+     <button id='button'>Clique aqui!</button>
+
+     <script src='button.js'></script>
+
+  </body>
+
+</html>
+
+Vamos criar um button.js, dentro deste arquivo, vamos recuperaruma referencia a esse elemento pelo ID e depois salva-lo!
+
+`const button = document.getElementById('button')`
+
+Vamos add um ouvite de eventos em button, para checkar `click`
+Depois vamos add IIFE como segundo argumento!
+
+// button.js
+
+button.addEventListener('click', (function() {
+  let count = 0; // definida para zero
+
+  return function() {
+    count += 1; // incrementa 1
+    // verificacao!!
+    if (count === 2) {
+      alert('Esse alerta aparece a cada duas pressionadas!');
+      count = 0;
+    }
+  };
+})());
+
+1 - temos count = 0
+2 - retornamos func dessa func
+3 - func que retorna aumenta 1
+    - mas o alerta o usuario e terona a contagem a 0 se atingir 2
+
+## Benefícios das expressões de função invocada imediatamente
+Vimos como usar uma expressão de função invocada imediatamente cria um escopo privado que protege variáveis e métodos contra acesso. Em último caso, as IIFEs usam as funções retornadas para acessar dados privados dentro do fechamento. Isso funciona muito bem: apesar dessas funções retornadas estarem acessíveis publicamente, a privacidade das variáveis ainda estão definidas dentro delas!
+
+Outra excelente oportunidade de usar uma IIFE é quando você quer executar código sem criar mais variáveis globais. Porém, note que o objetivo de uma IIFE é ser invocada apenas uma vez, para criar um contexto de execução único. Se você espera que seu código seja reutilizado (por exemplo, uma função que deve ser executada mais de uma vez no aplicativo), declara a função e invocá-la depois pode ser uma opção melhor.
+
+Apesar de tudo, se você tiver uma tarefa pontual (por exemplo, inicializar o aplicativo), uma IIFE é perfeita, porque ela executa a tarefa sem poluir o ambiente global com mais variáveis. Afinal, reduzir o namespace global diminui a chance de colisões com nomes de variável duplicados.
+
+## Resumo
+Uma expressão de função invocada imediatamente, ou IIFE, é uma função chamada imediatamente depois de ser definida. Utilizar uma IIFE junto com fechamentos permite criar um escopo privado, que mantém a privacidade das variáveis definidas dentro dela. E, como menos variáveis são criadas, uma IIFE ajuda a minimizar a poluição do ambiente global, reduzindo as chances de colisão entre nomes de variável.
+
+
+links
+* https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
+
+* http://adripofjavascript.com/blog/drips/an-introduction-to-iffes-immediately-invoked-function-expressions.html
+
+* http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+
+
+
+
+*****
 
