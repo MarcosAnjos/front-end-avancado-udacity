@@ -2,7 +2,7 @@
 
 * [Introducao](#intro)
 * [Criar e modificar propriedades](#cria_modifica)
-* Invocando métodos de obj
+* [Invocando métodos de obj](#invocando_metodos)
 * Cuidado com os globais 
 * Extraindo propriendades e valores
 * Resumo da aula
@@ -186,5 +186,77 @@ para comparar usamos `===` comparar propriedades
 link
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete 
 
+*************
+# Invocando Metodos 
 
+## Função X Métodos
 
+Os obj com propriedades que se comportam mais como atributos. Ou sejam, propriedades como `color` ou `type` são  dados que descrevem um objeto, mas não fazem nada. Podemos levar a funcionalidade aos obj add metodos a eles. 
+
+Digamos que voce tenha uma função `sayHellow()` que simplesmente registra uma mensagem
+
+`
+function sayHellow (){
+  console.log('hi there');
+}
+`
+
+Para add uma obj `developer` com uma unica propriedade `name`.
+
+`
+const developer = {
+  name = 'andrew`
+}
+`
+
+Agora para add uma func. sayHello() ao obj.
+`
+developer.sayHello = function (){
+  console.log('hi there')
+}
+`
+
+E o nosso obj developer atualizado fica assim:
+
+` const developer = {
+    name: 'andrew`, 
+    sayHello : function(){
+      console.log('hi there')
+    }
+}
+`
+## Chamando metodos
+
+Para acessar metodos de uma funcao facil, podemos passar obj usando o nome da propriedade. As propriedade de funcao de um obj sao chamado de metodo. 
+
+`developer.sayHello()`
+
+## Passando argumentos em métodos
+
+Se o método aceita argumentos, podemos passar metodos!
+
+## Um método pode acessar o objeto em que foi chamando
+
+Um obj pode conter dados e a forma de manipular esses dados. Para referenciar as proprias propriedades do obj, e manipular algumas dessas propriedades. 
+Se torna possivel pelo THIS 
+
+Usando This podemos acessar diretamente um obj em que sao chamandos. 
+
+`
+const triangle = {
+  type : 'scalene', 
+  identify : function(){
+    console.log(`this is a ${this.type} triangle`)
+  }
+}
+`
+Quando usando o this para acessar o obj. E o metodo de acesso direto as propriedades do obj triangle
+
+`triangle.idetify()`
+
+Quando esse metodo identify(), é chamado o valor this é definido como o obj em que foi chamando, que é tringle. Com isso, o metodo identify(), pode acessar e usar a propriedade type de triagule,
+
+links 
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#Defining_methods
+
+* https://javascript.info/object-methods#this-in-methods
