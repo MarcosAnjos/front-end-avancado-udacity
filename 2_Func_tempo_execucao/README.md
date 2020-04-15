@@ -112,5 +112,39 @@ const shortNames = names.filter(function(name) {
 
 No filter() assim como acontece no map() retorna uma nova matriz, mas nao modifica a original.
 
+*********
+<div id="escopo">
+
+# Escopo
+
+Escopo determina onde uma variavel pode ser vista em um código. Galera da computação gosta de chamar de ESCOPO LÉXICO
+
+Mas tem outro tipo de escokpo chamado escopo de tempo de execução. Quando uma função é execultada, cria um novo escopo de tempo de execução. Esse escopo representa o contexto da função, ou mais especificamente, o conjunto de variaveis diskponivel para a função usar. 
+
+Logo o escopo tem uma função que descreve as variaveis diponivel para uso dentro tal função. 
+
+1 - Os argumentos da função
+2 - Variaveis locais declaradas dentro da funçao
+3 - Variaveis do escopo de sua função-mae
+4 - Variaveis globais.
 
 
+
+Ordem que interpretador JS realiza a busca
+
+1 - variaveis locais
+2 - variaveis de funcao pais
+3 - variaveis de funcao pais de funcao pais
+4 - variaveis globais
+
+
+links
+* https://www.udacity.com/course/es6-javascript-improved--ud356
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+
+* https://www.youtube.com/watch?v=Ji6NHEnNHcA&t=26m9s
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions
