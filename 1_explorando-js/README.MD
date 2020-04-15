@@ -3,8 +3,8 @@
 * [Introducao](#intro)
 * [Criar e modificar propriedades](#cria_modifica)
 * [Invocando métodos de obj](#invocando_metodos)
-* Cuidado com os globais 
-* Extraindo propriendades e valores
+* [Cuidado com os globais](#cuidado_con_globais) 
+* [Extraindo propriendades e valores](#extraindo-propriedades-valores)
 * Resumo da aula
 
 <div id="intro">
@@ -187,6 +187,7 @@ link
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete 
 
 *************
+<div id="invocando_metodos">
 # Invocando Metodos 
 
 ## Função X Métodos
@@ -260,3 +261,133 @@ links
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#Defining_methods
 
 * https://javascript.info/object-methods#this-in-methods
+
+
+************
+<div id="cuidado_con_globais">
+
+# Cuidado com os globais
+
+## Os perterces dos objetos
+
+const chameleon = {
+  eyes: 2,
+  lookAround: function () {
+     console.log(`Vejo você com os meus ${this.eyes} olhos!`);
+  }
+};
+
+chameleon.lookAround();
+// 'Vejo você com os meus 2 olhos!'
+
+lookAround: function () {
+  console.log(`Vejo você com os meus ${this.eyes} olhos!`);
+}
+
+Dentro do corpo da função, temos o código this.eyes. Como o método lookAround() foi chamado no objeto chameleon como chameleon.lookAround(), o valor de this é o próprio objeto chameleon! Por isso, this.eyes é o número 2, já que referencia a propriedade eyes do objeto chameleon.
+
+## This e invocacao de funcao
+
+Usando a mesma funcao acima chameleon
+
+function whoThis (){
+  this.trickysh = true
+}
+
+chameleon.lookAround()
+
+whoThis()
+
+## Comparar as estrutura d func./metodo
+
+THIS E INVOCAÇÃO 
+
+COMO A FUNCAO É INVOCADA DETERMINADA O VALOR DE 'THIS' DENTRO DA FUNÇÃO
+
+Como .lookAround() é invocado como método, o valor de this dentro de .lookAround() é tudo que estpa a esquerda do ponto na invocação. 
+
+`chameleon.lookAround()`
+
+O metodo `chameleon` esta na esquerda do ponto. Portanto, dentro do método  .lookAround() e this vai referenciar o obj chameleon
+
+Bom agora podemos nos perguntar com a funcao whothis()
+pois como ela representa uma func. simples, não tem como método em um obj. 
+
+`whoThis()`
+
+Nesse ponto nao existe.. nada a esquerda do ponto. Como não tem nada a esquerda, no JS ele tem um ponto de curiosidade. QUANDO UMA FUNÇÃO COMUM É INVOCADA, O VALOR DE THIS É O GLOBAL. 
+
+## lembrete
+
+O objeto window é fornecido pelo navegador e não faz parte da linguagem nem da especificação JavaScript. Toda declaração de variável global (ou seja, as que usam var) ou de função global são adicionadas como propriedades a esse objeto window. O uso excessivo de variáveis globais não é uma boa prática e pode causar problemas inesperados a um código perfeitamente escrito.
+
+Independentemente de você trabalhar com o objeto window ou com outro criado por você, lembre-se de que os objetos são compostos de pares de chave/valor. Na próxima seção, vamos ver como extrair essas chaves ou valores individuais!
+
+links
+* https://developer.mozilla.org/en-US/docs/Web/API/Window
+* https://html.spec.whatwg.org/multipage/window-object.html#the-window-object
+* http://wiki.c2.com/?GlobalVariablesAreBad
+* https://en.wikipedia.org/wiki/Coupling_(computer_programming
+
+
+*****************
+<div id="extraindo-propriedades-valores">
+
+# Extraindo propriedades e valores
+
+## Métodos de objeto
+
+Quando usando func contrutora `Object()` antes de criar ou insranciar, novos objs com a palavra-chave new
+
+`const myNewFrancyObj = new Object()`
+
+A func Object() tem alguns metodos add proprios para ajudar :
+
+Object.keys() Object.values()
+
+# Object.keys() e Object.values()
+
+Em essencia, um objeto é apenas um conjunto de pares de chave/valor. E se quiséssemos extrair apenas as chaves de um obj. 
+
+const dictionary = {
+  car: 'automóvel',
+  apple: 'alimento saudável',
+  cat: 'animal peludo fofinho',
+  dog: 'melhor amigo'
+};
+
+Podemos usar Object.keys(), fornecendo a um objeto, ele extrai apenas as chaves objeto e as retorna em uma matriz
+
+Object.keys(dictionary);
+
+// [car, apple, 'cat', 'dog']
+
+O Object.values() se quiser uma lista dos valores de um objeto, podemos usar Object.values()
+
+Object.values(dictionary)
+
+// ['automóvel', 'alimento saudável', 'animal peludo fofinho', 'melhor amigo']
+
+
+const triangle = {
+  type: 'polygon',
+  sides: 3,
+  sumOfAngles: 180,
+  equilateral: true,
+  equiangular: true
+};
+
+Object.keys(triangle )
+
+A função construtora Object() tem acesso a diversos métodos para auxiliar no desenvolvimento. Resumindo:
+
+object.keys() retorna uma matriz das chaves (nome das propriedades) de determinado objeto. Object.values() retorna uma matriz dos valores (valor das propriedades) de determinado objeto.
+
+links
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
+
+
+************
