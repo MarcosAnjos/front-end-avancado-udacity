@@ -39,5 +39,7 @@ Neste projeto, vamos montar um mapa da cidade de Santa Helena - Pr. E vamos add 
 
 *****************
 
-# Modulo - Explorando JS - Objetos, ferramentas e testes
+# Modulo 1 - Explorando JS - Objetos, ferramentas e testes
+
+# Modulo 2 - Função em tempo de execução
 
