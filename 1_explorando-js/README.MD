@@ -5,7 +5,7 @@
 * [Invocando métodos de obj](#invocando_metodos)
 * [Cuidado com os globais](#cuidado_con_globais) 
 * [Extraindo propriendades e valores](#extraindo-propriedades-valores)
-* Resumo da aula
+* [links](#links)
 
 <div id="intro">
 
@@ -389,5 +389,13 @@ links
 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
 
+
+************
+<div id="links">
+
+Links 
+
+* http://crockford.com/javascript/
+* https://www.goodreads.com/book/show/2998152-javascript
 
 ************
